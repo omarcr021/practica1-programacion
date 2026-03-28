@@ -28,7 +28,7 @@ public class CampanaService
             FechaFin = new DateOnly(2026, 4, 1),
             DescuentoPct = 25,
             Canal = "Tienda",
-            Descripcion = "Descuentos en menaje, decoracion y organizacion del hogar."
+            Descripcion = "Promociones en menaje, decoracion y organizacion del hogar."
         },
         new Campana
         {
@@ -97,15 +97,9 @@ public class CampanaService
         return query.OrderBy(c => c.Nombre).ToList();
     }
 
-    public Campana? ObtenerPorId(int id)
-    {
-        return Campanas.FirstOrDefault(c => c.Id == id);
-    }
-
     public IReadOnlyList<string> ObtenerCategorias()
     {
-        return Campanas
-            .Select(c => c.Categoria)
+        return Campanas.Select(c => c.Categoria)
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(c => c)
             .ToList();
@@ -113,17 +107,20 @@ public class CampanaService
 
     public IReadOnlyList<string> ObtenerEstados()
     {
-        return Campanas
-            .Select(c => c.Estado)
+        return Campanas.Select(c => c.Estado)
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(e => e)
             .ToList();
     }
 
+    public Campana? ObtenerPorId(int id)
+    {
+        return Campanas.FirstOrDefault(c => c.Id == id);
+    }
+
     public CampanasResumenViewModel ObtenerResumen()
     {
         var total = Campanas.Count;
-
         return new CampanasResumenViewModel
         {
             TotalCampanas = total,

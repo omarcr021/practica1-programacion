@@ -1,70 +1,44 @@
 @model practica.Models.CampanasResumenViewModel
 
 @{
-    ViewData["Title"] = "Resumen de campanas";
+    ViewData["Title"] = "Resumen";
 }
 
-<h1 class="h3 mb-3">Resumen de Campanas</h1>
+<section class="campanas-wrap">
+    <h1 class="campanas-title">Resumen de Campanas</h1>
 
-<div class="row g-3 mb-4">
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="h6 text-muted">Total campanas</h2>
-                <p class="display-6 mb-0">@Model.TotalCampanas</p>
-            </div>
+    <div class="resumen-grid">
+        <div class="resumen-card">
+            <p class="resumen-k">Total campanas</p>
+            <p class="resumen-v">@Model.TotalCampanas</p>
+        </div>
+
+        <div class="resumen-card">
+            <p class="resumen-k">Campanas vigentes</p>
+            <p class="resumen-v text-success">@Model.CampanasVigentes</p>
+        </div>
+
+        <div class="resumen-card">
+            <p class="resumen-k">Campanas proximas</p>
+            <p class="resumen-v text-primary">@Model.CampanasProximas</p>
+        </div>
+
+        <div class="resumen-card">
+            <p class="resumen-k">Promedio descuento</p>
+            <p class="resumen-v">@Model.PromedioDescuento.ToString("0.##")%</p>
         </div>
     </div>
 
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="h6 text-muted">Campanas vigentes</h2>
-                <p class="display-6 mb-0 text-success">@Model.CampanasVigentes</p>
-            </div>
-        </div>
+    <div class="resumen-card resumen-canal-card">
+        <h2>Cantidad por canal</h2>
+        <ul class="resumen-canal-list">
+            @foreach (var item in Model.CantidadPorCanal)
+            {
+                <li>
+                    <span>@item.Key</span>
+                    <span class="resumen-canal-badge">@item.Value</span>
+                </li>
+            }
+        </ul>
     </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="h6 text-muted">Campanas proximas</h2>
-                <p class="display-6 mb-0 text-primary">@Model.CampanasProximas</p>
-            </div>
-        </div>
-    </div>
-
-    <div class="col-12 col-md-6 col-lg-3">
-        <div class="card h-100">
-            <div class="card-body">
-                <h2 class="h6 text-muted">Promedio de descuento</h2>
-                <p class="display-6 mb-0">@Model.PromedioDescuento.ToString("0.##")%</p>
-            </div>
-        </div>
-    </div>
-</div>
-
-<div class="card">
-    <div class="card-body">
-        <h2 class="h5 mb-3">Cantidad por canal</h2>
-        <div class="table-responsive">
-            <table class="table table-sm align-middle mb-0">
-                <thead>
-                    <tr>
-                        <th>Canal</th>
-                        <th class="text-end">Cantidad</th>
-                    </tr>
-                </thead>
-                <tbody>
-                @foreach (var item in Model.CantidadPorCanal)
-                {
-                    <tr>
-                        <td>@item.Key</td>
-                        <td class="text-end">@item.Value</td>
-                    </tr>
-                }
-                </tbody>
-            </table>
-        </div>
-    </div>
-</div>
+</section>

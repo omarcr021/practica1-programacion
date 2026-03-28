@@ -2,37 +2,50 @@
 
 @{
     ViewData["Title"] = "Detalle de campana";
+
+    var estadoClass = Model.Estado switch
+    {
+        "Vigente" => "badge-vigente",
+        "Proxima" => "badge-proxima",
+        _ => "badge-finalizada"
+    };
 }
 
-<h1 class="h3 mb-3">Detalle de Campana</h1>
+<section class="campanas-wrap campanas-detail-wrap">
+    <a asp-controller="Campanas" asp-action="Index" class="campanas-back">Volver al listado</a>
 
-<div class="card shadow-sm">
-    <div class="card-body">
-        <dl class="row mb-0">
-            <dt class="col-sm-3">Nombre</dt>
-            <dd class="col-sm-9">@Model.Nombre</dd>
+    <article class="campana-detail-card">
+        <div class="campana-card-head">
+            <h1>@Model.Nombre</h1>
+            <span class="campana-badge @estadoClass">@Model.Estado</span>
+        </div>
 
-            <dt class="col-sm-3">Categoria</dt>
-            <dd class="col-sm-9">@Model.Categoria</dd>
+        <div class="campana-detail-grid">
+            <div>
+                <p class="k">Categoria</p>
+                <p class="v">@Model.Categoria</p>
+            </div>
+            <div>
+                <p class="k">Canal</p>
+                <p class="v">@Model.Canal</p>
+            </div>
+            <div>
+                <p class="k">Inicio</p>
+                <p class="v">@Model.FechaInicio.ToString("dd 'de' MMMM 'de' yyyy")</p>
+            </div>
+            <div>
+                <p class="k">Fin</p>
+                <p class="v">@Model.FechaFin.ToString("dd 'de' MMMM 'de' yyyy")</p>
+            </div>
+            <div>
+                <p class="k">Descuento</p>
+                <p class="v">@Model.DescuentoPct.ToString("0.##")%</p>
+            </div>
+        </div>
 
-            <dt class="col-sm-3">Estado</dt>
-            <dd class="col-sm-9">@Model.Estado</dd>
-
-            <dt class="col-sm-3">Fecha inicio / fin</dt>
-            <dd class="col-sm-9">@Model.FechaInicio.ToString("dd/MM/yyyy") - @Model.FechaFin.ToString("dd/MM/yyyy")</dd>
-
-            <dt class="col-sm-3">Canal</dt>
-            <dd class="col-sm-9">@Model.Canal</dd>
-
-            <dt class="col-sm-3">Descuento</dt>
-            <dd class="col-sm-9">@Model.DescuentoPct.ToString("0.##")%</dd>
-
-            <dt class="col-sm-3">Descripcion</dt>
-            <dd class="col-sm-9">@Model.Descripcion</dd>
-        </dl>
-    </div>
-</div>
-
-<div class="mt-3">
-    <a asp-controller="Campanas" asp-action="Index" class="btn btn-outline-secondary">Volver al listado</a>
-</div>
+        <div class="campana-description">
+            <p class="k">Descripcion</p>
+            <p class="v">@Model.Descripcion</p>
+        </div>
+    </article>
+</section>

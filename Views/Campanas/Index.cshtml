@@ -1,0 +1,48 @@
+@model IReadOnlyList<practica.Models.Campana>
+
+@{
+    ViewData["Title"] = "Campanas";
+}
+
+<section class="campaign-list">
+    <div class="campaign-list-head">
+        <h1>Campanas Comerciales</h1>
+        <span class="campaign-total">@Model.Count campanas</span>
+    </div>
+
+    <div class="campaign-grid">
+        @foreach (var campana in Model)
+        {
+            var estadoClass = campana.Estado switch
+            {
+                "Vigente" => "state-vigente",
+                "Proxima" => "state-proxima",
+                _ => "state-finalizada"
+            };
+
+            <article class="campaign-card">
+                <div class="campaign-card-head">
+                    <h2>@campana.Nombre</h2>
+                    <span class="campaign-state @estadoClass">@campana.Estado</span>
+                </div>
+
+                <p class="campaign-meta">
+                    @campana.Categoria
+                    <span class="dot"></span>
+                    @campana.DescuentoPct.ToString("0.##")%
+                    <span class="dot"></span>
+                    @campana.FechaInicio.ToString("dd MMM yyyy")
+                </p>
+
+                <p class="campaign-channel">@campana.Canal</p>
+
+                <a asp-controller="Campanas"
+                   asp-action="Detalle"
+                   asp-route-id="@campana.Id"
+                   class="campaign-detail-btn">
+                    Ver detalle
+                </a>
+            </article>
+        }
+    </div>
+</div>

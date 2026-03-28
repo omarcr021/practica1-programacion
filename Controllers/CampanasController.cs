@@ -16,7 +16,7 @@ public class CampanasController : Controller
     [HttpGet("Campanas")]
     public IActionResult Index(string? categoria, string? estado)
     {
-        var viewModel = new CampanasIndexViewModel
+        var vm = new CampanasIndexViewModel
         {
             Campanas = _campanaService.Listar(categoria, estado),
             Categorias = _campanaService.ObtenerCategorias(),
@@ -25,7 +25,7 @@ public class CampanasController : Controller
             EstadoSeleccionado = estado
         };
 
-        return View(viewModel);
+        return View(vm);
     }
 
     [HttpGet("Campanas/Detalle/{id:int}")]
@@ -38,5 +38,12 @@ public class CampanasController : Controller
         }
 
         return View(campana);
+    }
+
+    [HttpGet("Campanas/Resumen")]
+    public IActionResult Resumen()
+    {
+        var resumen = _campanaService.ObtenerResumen();
+        return View(resumen);
     }
 }

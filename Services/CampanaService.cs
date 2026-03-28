@@ -94,9 +94,7 @@ public class CampanaService
             query = query.Where(c => string.Equals(c.Estado, estado, StringComparison.OrdinalIgnoreCase));
         }
 
-        return query
-            .OrderBy(c => c.Nombre)
-            .ToList();
+        return query.OrderBy(c => c.Nombre).ToList();
     }
 
     public Campana? ObtenerPorId(int id)
@@ -120,5 +118,22 @@ public class CampanaService
             .Distinct(StringComparer.OrdinalIgnoreCase)
             .OrderBy(e => e)
             .ToList();
+    }
+
+    public CampanasResumenViewModel ObtenerResumen()
+    {
+        var total = Campanas.Count;
+
+        return new CampanasResumenViewModel
+        {
+            TotalCampanas = total,
+            CampanasVigentes = Campanas.Count(c => c.Estado.Equals("Vigente", StringComparison.OrdinalIgnoreCase)),
+            CampanasProximas = Campanas.Count(c => c.Estado.Equals("Proxima", StringComparison.OrdinalIgnoreCase)),
+            PromedioDescuento = total == 0 ? 0 : Campanas.Average(c => c.DescuentoPct),
+            CantidadPorCanal = Campanas
+                .GroupBy(c => c.Canal)
+                .OrderBy(g => g.Key)
+                .ToDictionary(g => g.Key, g => g.Count())
+        };
     }
 }

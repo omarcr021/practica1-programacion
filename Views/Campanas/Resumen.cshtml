@@ -1,0 +1,57 @@
+@model practica.Models.CampanasResumenViewModel
+
+@{
+    ViewData["Title"] = "Resumen";
+}
+
+<h1 class="h3 mb-3">Resumen de Campanas</h1>
+
+<div class="row g-3 mb-3">
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Total campanas</h2>
+                <p class="display-6 mb-0">@Model.TotalCampanas</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Campanas vigentes</h2>
+                <p class="display-6 mb-0 text-success">@Model.CampanasVigentes</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Campanas proximas</h2>
+                <p class="display-6 mb-0 text-primary">@Model.CampanasProximas</p>
+            </div>
+        </div>
+    </div>
+    <div class="col-12 col-md-6 col-lg-3">
+        <div class="card h-100">
+            <div class="card-body">
+                <h2 class="h6 text-muted">Promedio descuento</h2>
+                <p class="display-6 mb-0">@Model.PromedioDescuento.ToString("0.##")%</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="card">
+    <div class="card-body">
+        <h2 class="h5 mb-3">Cantidad por canal</h2>
+        <ul class="list-group">
+            @foreach (var item in Model.CantidadPorCanal)
+            {
+                <li class="list-group-item d-flex justify-content-between align-items-center">
+                    <span>@item.Key</span>
+                    <span class="badge text-bg-secondary">@item.Value</span>
+                </li>
+            }
+        </ul>
+    </div>
+</div>

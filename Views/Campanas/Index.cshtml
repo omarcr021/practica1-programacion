@@ -1,12 +1,42 @@
-@model IReadOnlyList<practica.Models.Campana>
+@model practica.Models.CampanasIndexViewModel
 
 @{
     ViewData["Title"] = "Campanas";
 }
 
-<div class="d-flex justify-content-between align-items-center mb-3">
-    <h1 class="h3 mb-0">Listado de Campanas Comerciales</h1>
-    <span class="badge text-bg-secondary">Total: @Model.Count</span>
+<h1 class="h3 mb-3">Campanas Comerciales</h1>
+
+<div class="card mb-3">
+    <div class="card-body">
+        <form asp-controller="Campanas" asp-action="Index" method="get" class="row g-2 align-items-end">
+            <div class="col-12 col-md-4">
+                <label for="categoria" class="form-label">Categoria</label>
+                <select id="categoria" name="categoria" class="form-select">
+                    <option value="">Todas</option>
+                    @foreach (var categoria in Model.Categorias)
+                    {
+                        <option value="@categoria" selected="@(Model.CategoriaSeleccionada == categoria)">@categoria</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-md-4">
+                <label for="estado" class="form-label">Estado</label>
+                <select id="estado" name="estado" class="form-select">
+                    <option value="">Todos</option>
+                    @foreach (var estado in Model.Estados)
+                    {
+                        <option value="@estado" selected="@(Model.EstadoSeleccionado == estado)">@estado</option>
+                    }
+                </select>
+            </div>
+
+            <div class="col-12 col-md-4 d-flex gap-2">
+                <button type="submit" class="btn btn-primary">Filtrar</button>
+                <a asp-controller="Campanas" asp-action="Index" class="btn btn-outline-secondary">Limpiar</a>
+            </div>
+        </form>
+    </div>
 </div>
 
 <div class="table-responsive">
@@ -23,34 +53,30 @@
             </tr>
         </thead>
         <tbody>
-        @foreach (var campana in Model)
+        @if (Model.Campanas.Count == 0)
         {
             <tr>
-                <td>@campana.Nombre</td>
-                <td>@campana.Categoria</td>
-                <td>
-                    @if (campana.Estado == "Vigente")
-                    {
-                        <span class="badge text-bg-success">@campana.Estado</span>
-                    }
-                    else if (campana.Estado == "Proxima")
-                    {
-                        <span class="badge text-bg-warning">@campana.Estado</span>
-                    }
-                    else
-                    {
-                        <span class="badge text-bg-secondary">@campana.Estado</span>
-                    }
-                </td>
-                <td>@campana.Canal</td>
-                <td>@campana.DescuentoPct.ToString("0.##")%</td>
-                <td>@campana.FechaInicio.ToString("dd/MM/yyyy") - @campana.FechaFin.ToString("dd/MM/yyyy")</td>
-                <td class="text-end">
-                    <a asp-controller="Campanas" asp-action="Details" asp-route-id="@campana.Id" class="btn btn-sm btn-outline-primary">
-                        Ver detalle
-                    </a>
-                </td>
+                <td colspan="7" class="text-center text-muted">No se encontraron campanas con los filtros seleccionados.</td>
             </tr>
+        }
+        else
+        {
+            @foreach (var campana in Model.Campanas)
+            {
+                <tr>
+                    <td>@campana.Nombre</td>
+                    <td>@campana.Categoria</td>
+                    <td>@campana.Estado</td>
+                    <td>@campana.Canal</td>
+                    <td>@campana.DescuentoPct.ToString("0.##")%</td>
+                    <td>@campana.FechaInicio.ToString("dd/MM/yyyy") - @campana.FechaFin.ToString("dd/MM/yyyy")</td>
+                    <td class="text-end">
+                        <a asp-controller="Campanas" asp-action="Detalle" asp-route-id="@campana.Id" class="btn btn-sm btn-outline-primary">
+                            Ver detalle
+                        </a>
+                    </td>
+                </tr>
+            }
         }
         </tbody>
     </table>

@@ -1,4 +1,5 @@
 using Microsoft.AspNetCore.Mvc;
+using practica.Models;
 using practica.Services;
 
 namespace practica.Controllers;
@@ -12,15 +13,25 @@ public class CampanasController : Controller
         _campanaService = campanaService;
     }
 
-    public IActionResult Index()
+    [HttpGet("Campanas")]
+    public IActionResult Index(string? categoria, string? estado)
     {
-        var campanas = _campanaService.GetAll();
-        return View(campanas);
+        var viewModel = new CampanasIndexViewModel
+        {
+            Campanas = _campanaService.Listar(categoria, estado),
+            Categorias = _campanaService.ObtenerCategorias(),
+            Estados = _campanaService.ObtenerEstados(),
+            CategoriaSeleccionada = categoria,
+            EstadoSeleccionado = estado
+        };
+
+        return View(viewModel);
     }
 
-    public IActionResult Details(int id)
+    [HttpGet("Campanas/Detalle/{id:int}")]
+    public IActionResult Detalle(int id)
     {
-        var campana = _campanaService.GetById(id);
+        var campana = _campanaService.ObtenerPorId(id);
         if (campana is null)
         {
             return NotFound();

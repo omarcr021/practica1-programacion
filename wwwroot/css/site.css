@@ -19,6 +19,9 @@ html {
 
 body {
   margin-bottom: 60px;
+  font-family: "Segoe UI", "Tahoma", sans-serif;
+  background: #f3f4f7;
+  color: #1f2937;
 }
 
 .form-floating > .form-control-plaintext::placeholder, .form-floating > .form-control::placeholder {
@@ -28,4 +31,260 @@ body {
 
 .form-floating > .form-control-plaintext:focus::placeholder, .form-floating > .form-control:focus::placeholder {
   text-align: start;
+}
+
+.portal-header {
+  background: #ffffff;
+  border-bottom: 1px solid #e5e7eb;
+  margin-bottom: 1rem;
+}
+
+.portal-topbar {
+  min-height: 52px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.75rem;
+}
+
+.portal-brand {
+  text-decoration: none;
+  font-weight: 700;
+  color: #ef4d2f;
+}
+
+.portal-brand:hover {
+  color: #d43f24;
+}
+
+.portal-nav {
+  display: flex;
+  align-items: center;
+  gap: 0.35rem;
+}
+
+.portal-nav-link {
+  text-decoration: none;
+  color: #6b7280;
+  font-size: 0.78rem;
+  font-weight: 600;
+  padding: 0.22rem 0.62rem;
+  border-radius: 999px;
+  border: 1px solid #e5e7eb;
+  background: #ffffff;
+}
+
+.portal-nav-link:hover {
+  color: #1f2937;
+  border-color: #d1d5db;
+}
+
+.portal-nav-link.active {
+  color: #ffffff;
+  border-color: #ef4d2f;
+  background: #ef4d2f;
+}
+
+.portal-nav-link[aria-disabled="true"] {
+  opacity: 0.8;
+  pointer-events: none;
+}
+
+.portal-footer {
+  border-top: 1px solid #e5e7eb;
+  padding: 0.8rem 0;
+  font-size: 0.85rem;
+  color: #6b7280;
+  background: #ffffff;
+}
+
+.campaign-list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.95rem;
+}
+
+.campaign-list-head h1 {
+  margin: 0;
+  font-size: 2rem;
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+.campaign-total {
+  font-size: 0.85rem;
+  color: #6b7280;
+  font-weight: 600;
+}
+
+.campaign-grid {
+  display: grid;
+  gap: 0.8rem;
+  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+}
+
+.campaign-card {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 10px;
+  padding: 0.75rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+}
+
+.campaign-card-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  gap: 0.5rem;
+}
+
+.campaign-card h2 {
+  margin: 0;
+  font-size: 1rem;
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.campaign-state {
+  display: inline-block;
+  font-size: 0.66rem;
+  line-height: 1;
+  font-weight: 700;
+  padding: 0.22rem 0.45rem;
+  border-radius: 999px;
+  color: #ffffff;
+  white-space: nowrap;
+}
+
+.state-vigente {
+  background: #22a564;
+}
+
+.state-proxima {
+  background: #2f80ed;
+}
+
+.state-finalizada {
+  background: #8f96a3;
+}
+
+.campaign-meta,
+.campaign-channel {
+  margin: 0;
+  color: #6b7280;
+  font-size: 0.75rem;
+}
+
+.dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: #9ca3af;
+  display: inline-block;
+  margin: 0 0.3rem;
+  transform: translateY(-1px);
+}
+
+.campaign-detail-btn {
+  border: 1px solid #e5e7eb;
+  background: #f9fafb;
+  text-decoration: none;
+  color: #374151;
+  font-weight: 600;
+  font-size: 0.78rem;
+  text-align: center;
+  padding: 0.45rem;
+  border-radius: 7px;
+}
+
+.campaign-detail-btn:hover {
+  background: #f3f4f6;
+  color: #111827;
+}
+
+.campaign-detail {
+  background: #ffffff;
+  border: 1px solid #e5e7eb;
+  border-radius: 12px;
+  padding: 1rem;
+}
+
+.campaign-detail-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 0.75rem;
+  border-bottom: 1px solid #eef2f7;
+  padding-bottom: 0.75rem;
+  margin-bottom: 0.9rem;
+}
+
+.campaign-detail-head h1 {
+  margin: 0;
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.campaign-detail-grid {
+  display: grid;
+  grid-template-columns: 160px 1fr;
+  gap: 0.45rem 0.75rem;
+  margin: 0 0 1rem;
+}
+
+.campaign-detail-grid dt {
+  font-weight: 700;
+  color: #374151;
+}
+
+.campaign-detail-grid dd {
+  margin: 0;
+  color: #4b5563;
+}
+
+.campaign-back-btn {
+  display: inline-block;
+  text-decoration: none;
+  border: 1px solid #d1d5db;
+  color: #374151;
+  background: #f9fafb;
+  padding: 0.48rem 0.8rem;
+  border-radius: 7px;
+  font-size: 0.85rem;
+  font-weight: 600;
+}
+
+.campaign-back-btn:hover {
+  background: #f3f4f6;
+}
+
+@media (max-width: 767px) {
+  .portal-topbar {
+    flex-direction: column;
+    align-items: flex-start;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  .campaign-list-head {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .campaign-list-head h1 {
+    font-size: 1.55rem;
+  }
+
+  .campaign-detail-grid {
+    grid-template-columns: 1fr;
+    gap: 0.25rem;
+  }
+
+  .campaign-detail-grid dt {
+    margin-top: 0.5rem;
+  }
 }

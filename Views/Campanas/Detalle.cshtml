@@ -1,0 +1,38 @@
+@model practica.Models.Campana
+
+@{
+    ViewData["Title"] = "Detalle de campana";
+
+    var estadoClass = Model.Estado switch
+    {
+        "Vigente" => "state-vigente",
+        "Proxima" => "state-proxima",
+        _ => "state-finalizada"
+    };
+}
+
+<section class="campaign-detail">
+    <div class="campaign-detail-head">
+        <h1>@Model.Nombre</h1>
+        <span class="campaign-state @estadoClass">@Model.Estado</span>
+    </div>
+
+    <dl class="campaign-detail-grid">
+        <dt>Categoria</dt>
+        <dd>@Model.Categoria</dd>
+
+        <dt>Fecha inicio / fin</dt>
+        <dd>@Model.FechaInicio.ToString("dd/MM/yyyy") - @Model.FechaFin.ToString("dd/MM/yyyy")</dd>
+
+        <dt>Canal</dt>
+        <dd>@Model.Canal</dd>
+
+        <dt>Descuento</dt>
+        <dd>@Model.DescuentoPct.ToString("0.##")%</dd>
+
+        <dt>Descripcion</dt>
+        <dd>@Model.Descripcion</dd>
+    </dl>
+
+    <a asp-controller="Campanas" asp-action="Index" class="campaign-back-btn">Volver al listado</a>
+</section>
